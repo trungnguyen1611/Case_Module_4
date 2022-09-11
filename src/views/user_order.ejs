@@ -1,0 +1,224 @@
+<%- include('./partials/header.ejs') %>
+<!--====== App Content ======-->
+<div class="app-content">
+
+    <!--====== Section 1 ======-->
+    <div class="u-s-p-y-60">
+
+        <!--====== Section Content ======-->
+        <div class="section__content">
+            <div class="container">
+                <div class="breadcrumb">
+                    <div class="breadcrumb__wrap">
+                        <ul class="breadcrumb__list">
+                            <li class="has-separator">
+
+                                <a href="/">Home</a></li>
+                            <li class="is-marked">
+
+                                <a href="/user/profile">My Account</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--====== End - Section 1 ======-->
+
+
+    <!--====== Section 2 ======-->
+    <div class="u-s-p-b-60">
+
+        <!--====== Section Content ======-->
+        <div class="section__content">
+            <div class="dash">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-12">
+                            <%- include('./partials/user_side_bar_features.ejs') %>
+                        </div>
+
+                            <!--====== End - Dashboard Features ======-->
+
+                        <div class="col-lg-9 col-md-12">
+                            <div class="dash__box dash__box--shadow dash__box--radius dash__box--bg-white u-s-m-b-30">
+                                <div class="dash__pad-2">
+                                    <h1 class="dash__h1 u-s-m-b-14">My Orders</h1>
+
+                                    <span class="dash__text u-s-m-b-30">Here you can see all your orders.</span>
+                                    <div class="m-order__list">
+                                        <% listOrder.forEach(function(order) { %>
+                                        <div class="m-order__get">
+                                            <div class="manage-o__header u-s-m-b-30">
+                                                <div class="dash-l-r">
+                                                    <div>
+                                                        <div class="manage-o__text-2 u-c-secondary">Order #<%= order._id ? order._id : 'Not available'; %>
+                                                        </div>
+                                                        <div class="manage-o__text u-c-silver">
+                                                            Placed on <%=new Date(order.createdAt).toLocaleDateString('en-US');%>
+
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <div class="dash__link dash__link--brand">
+
+                                                            <a href="/user/my-order/detail/?order_id=<%= order._id%>">DETAIL</a></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="manage-o__description">
+                                                <div class="description__container">
+                                                    <div class="description__img-wrap">
+
+                                                        <img class="u-img-fluid"
+                                                             src="/images/product/electronic/product3.jpg" alt=""></div>
+                                                    <div class="description-title"><%=order.items ? order.items[0].name : "Nothing"%></div>
+                                                </div>
+                                                <div class="description__info-wrap">
+                                                    <div>
+
+                                                        <span class="manage-o__badge
+                                                        <%=order.status === 'Confirmed' ? "badge--shipped" :
+                                                                order.status === 'Pending' ? "badge--processing" :
+                                                                        "badge--delivered"%>"><%=order.status%>
+                                                            </span>
+                                                    </div>
+                                                    <div>
+
+                                                                <span class="manage-o__text-2 u-c-silver">Quantity:
+
+                                                                    <span class="manage-o__text-2 u-c-secondary">
+                                                                       <% let total = 0;
+                                                                           order.items.forEach(item => total += Number(item.amount)) %>
+                                                                        <%=total%>
+                                                                    </span></span>
+                                                    </div>
+                                                    <div>
+
+                                                                <span class="manage-o__text-2 u-c-silver">Total:
+
+                                                                    <span class="manage-o__text-2 u-c-secondary">$<%=order.total ? order.total : "None"%></span></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            <%})%>
+
+
+<!--                                        <div class="m-order__get">-->
+<!--                                            <div class="manage-o__header u-s-m-b-30">-->
+<!--                                                <div class="dash-l-r">-->
+<!--                                                    <div>-->
+<!--                                                        <div class="manage-o__text-2 u-c-secondary">Order #305423126-->
+<!--                                                        </div>-->
+<!--                                                        <div class="manage-o__text u-c-silver">Placed on 26 Oct 2016-->
+<!--                                                            09:08:37-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                    <div>-->
+<!--                                                        <div class="dash__link dash__link&#45;&#45;brand">-->
+
+<!--                                                            <a href="dash-manage-order.html">MANAGE</a></div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="manage-o__description">-->
+<!--                                                <div class="description__container">-->
+<!--                                                    <div class="description__img-wrap">-->
+
+<!--                                                        <img class="u-img-fluid" src="/images/product/women/product8.jpg"-->
+<!--                                                             alt=""></div>-->
+<!--                                                    <div class="description-title">New Dress D Nice Elegant</div>-->
+<!--                                                </div>-->
+<!--                                                <div class="description__info-wrap">-->
+<!--                                                    <div>-->
+
+<!--                                                        <span class="manage-o__badge badge&#45;&#45;shipped">Shipped</span>-->
+<!--                                                    </div>-->
+<!--                                                    <div>-->
+
+<!--                                                                <span class="manage-o__text-2 u-c-silver">Quantity:-->
+
+<!--                                                                    <span class="manage-o__text-2 u-c-secondary">1</span></span>-->
+<!--                                                    </div>-->
+<!--                                                    <div>-->
+
+<!--                                                                <span class="manage-o__text-2 u-c-silver">Total:-->
+
+<!--                                                                    <span class="manage-o__text-2 u-c-secondary">$16.00</span></span>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="m-order__get">-->
+<!--                                            <div class="manage-o__header u-s-m-b-30">-->
+<!--                                                <div class="dash-l-r">-->
+<!--                                                    <div>-->
+<!--                                                        <div class="manage-o__text-2 u-c-secondary">Order #305423126-->
+<!--                                                        </div>-->
+<!--                                                        <div class="manage-o__text u-c-silver">Placed on 26 Oct 2016-->
+<!--                                                            09:08:37-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                    <div>-->
+<!--                                                        <div class="dash__link dash__link&#45;&#45;brand">-->
+
+<!--                                                            <a href="dash-manage-order.html">MANAGE</a></div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="manage-o__description">-->
+<!--                                                <div class="description__container">-->
+<!--                                                    <div class="description__img-wrap">-->
+
+<!--                                                        <img class="u-img-fluid" src="/images/product/men/product8.jpg"-->
+<!--                                                             alt=""></div>-->
+<!--                                                    <div class="description-title">New Fashion D Nice Elegant</div>-->
+<!--                                                </div>-->
+<!--                                                <div class="description__info-wrap">-->
+<!--                                                    <div>-->
+
+<!--                                                        <span class="manage-o__badge badge&#45;&#45;delivered">Delivered</span>-->
+<!--                                                    </div>-->
+<!--                                                    <div>-->
+
+<!--                                                                <span class="manage-o__text-2 u-c-silver">Quantity:-->
+
+<!--                                                                    <span class="manage-o__text-2 u-c-secondary">1</span></span>-->
+<!--                                                    </div>-->
+<!--                                                    <div>-->
+
+<!--                                                                <span class="manage-o__text-2 u-c-silver">Total:-->
+
+<!--                                                                    <span class="manage-o__text-2 u-c-secondary">$16.00</span></span>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+                                    </div>
+                                </div>
+
+                                <div class="u-s-p-y-60">
+
+                                    <!--====== Pagination ======-->
+                                    <ul class="shop-p__pagination">
+                                        <% for (let i = 0; i < Math.ceil(totalOrders/3); i++) { %>
+                                        <li class="is-active">
+                                            <a href="/user/my-order/?page=<%=i%>"><%=i+1%></a></li>
+                                        <%} %>
+                                    </ul>
+                                    <!--====== End - Pagination ======-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--====== End - Section Content ======-->
+    </div>
+    <!--====== End - Section 2 ======-->
+</div>
+<!--====== End - App Content ======-->
+
+
